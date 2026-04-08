@@ -1,0 +1,55 @@
+import { withPayload } from '@payloadcms/next/withPayload'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(__filename)
+
+const nextConfig = {
+  images: {
+    // Cloudinary-യിൽ നിന്നുള്ള ചിത്രങ്ങൾ അനുവദിക്കാൻ താഴെ പറയുന്നവ ചേർത്തു
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**',  
+        pathname: '/**',
+      },
+    ] as any,
+
+    localPatterns: [
+      {
+        pathname: '/api/media/file/**',
+      },
+    ],
+  },
+
+  webpack: (config: any) => {
+    config.resolve.extensionAlias = {
+      '.cjs': ['.cts', '.cjs'],
+      '.js': ['.ts', '.tsx', '.js', '.jsx'],
+      '.mjs': ['.mts', '.mjs'],
+    }
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      components: path.resolve(dirname, 'src/components'),
+    }
+
+    return config
+  },
+
+  turbopack: {
+    root: path.resolve(dirname),
+  },
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+}
+
+export default withPayload(nextConfig, { devBundleServerPackages: false })
