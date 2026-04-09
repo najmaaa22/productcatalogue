@@ -16,7 +16,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
     
     if (!product || !product.isActive) return notFound()
-    const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3004'
+    const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
     const imageUrl = product.image?.url
     const finalImage = imageUrl?.startsWith('http') 
       ? imageUrl 

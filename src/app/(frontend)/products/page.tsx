@@ -10,7 +10,7 @@ export default async function ProductsPage({
 }) {
   const { page = '1', category } = await searchParams
   const payload = await getPayload({ config: configPromise })
-  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3004'
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
   const query: any = { isActive: { equals: true } }
   if (category && category !== 'All') {
     query.category = { equals: category }
