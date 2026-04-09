@@ -7,7 +7,6 @@ const dirname = path.dirname(__filename)
 
 const nextConfig = {
   images: {
-    // Cloudinary-യിൽ നിന്നുള്ള ചിത്രങ്ങൾ അനുവദിക്കാൻ താഴെ പറയുന്നവ ചേർത്തു
     remotePatterns: [
       {
         protocol: 'https',
